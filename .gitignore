@@ -1,0 +1,107 @@
+# Ignore all files from IntelliJ IDEA specific files
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore compiled class files
+*.class
+
+# Ignore maven / gradle specific files
+target/
+build/
+out/
+
+# Ignore IntelliJ's Workspace.xml
+workspace.xml
+
+# Ignore IntelliJ's temporary files and folders
+.idea/*
+!/.idea/inspectionProfiles
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/runConfigurations/
+!.idea/vcs.xml
+
+# Ignore project-specific iml file
+*.iml
+
+# Ignore user-specific run/debug configs
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Ignore generated files
+*.jar
+*.war
+*.ear
+
+# Ignore Maven files
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Ignore Gradle files
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.properties
+
+# Ignore Eclipse specific files
+.project
+.classpath
+.cproject
+.settings/
+bin/
+
+# Ignore MacOS specific files
+.DS_Store
+
+# Ignore Windows specific files
+Thumbs.db
+desktop.ini
+
+# Ignore Java log files and temporary files
+hs_err_pid*
+replay_pid*
+
+# Ignore any package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Ignore local env files
+.env
+
+# Ignore intellij environment files
+.idea/workspace.xml
+.idea/libraries
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/modules.xml
+
+# Ignore generated files by build tools
+target/
+out/
+build/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore node_modules folder if you have any frontend related files
+node_modules/
+
+# Ignore specific IDE metadata files
+*.iml
+.idea/
