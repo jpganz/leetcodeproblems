@@ -64,10 +64,25 @@ public class RotateArray {
 
     }
 
+    public static void rotateSecondVersion(int[] nums, int k) {
+        int safeKey = (k % nums.length);
+        int[] placeHolder = new int[nums.length];
+
+        int nextKey;
+        for (int j = 0; j <= nums.length - 1; j++) {
+            nextKey =  (j + safeKey) % nums.length;
+            placeHolder[nextKey] = nums[j];
+
+        }
+
+        for (int i = 0; i <= nums.length -1; i++) {
+            nums[i] = placeHolder[i];
+        }
+    }
+
 
     public static void main(String[] args) {
         int[] input = {1,2,3,4,5,6,7};
-        rotate(input, 3);
-        System.out.println(Arrays.toString(input));
+        rotateSecondVersion(input, 3);
     }
 }
