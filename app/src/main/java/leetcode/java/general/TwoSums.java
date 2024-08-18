@@ -43,7 +43,6 @@ public class TwoSums {
 
             pendingKey = target - nums[j];
             if(mapOfValueIndex.containsKey(pendingKey) && mapOfValueIndex.get(pendingKey) != j) {
-                System.out.println(" here i am :) ");
                 return new int[]{mapOfValueIndex.get(pendingKey), j};
             }
             mapOfValueIndex.put(nums[j], j);
