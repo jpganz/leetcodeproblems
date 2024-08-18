@@ -34,19 +34,22 @@ public class TwoSums {
 
 
 
+    // doing hashmaps will be O(n)
     public static int[] twoSumWithHashes(int[] nums, int target) {
         HashMap<Integer, Integer> mapOfValueIndex = new HashMap<>();
-        for(int i = 0; i <= nums.length - 1; i++) {
-            mapOfValueIndex.put(nums[i], i);
-        }
 
         int pendingKey;
         for(int j = 0; j <= nums.length - 1; j++) {
+
             pendingKey = target - nums[j];
             if(mapOfValueIndex.containsKey(pendingKey) && mapOfValueIndex.get(pendingKey) != j) {
-                return new int[]{j, mapOfValueIndex.get(pendingKey)};
+                System.out.println(" here i am :) ");
+                return new int[]{mapOfValueIndex.get(pendingKey), j};
             }
+            mapOfValueIndex.put(nums[j], j);
+
         }
+
         return new int[]{};
     }
 
@@ -55,7 +58,7 @@ public class TwoSums {
 
 
     public static void main(String[] args) {
-        int[] input = {3,2,4};
+        int[] input = {3,3,2};
         int[] returnedValues = twoSum(input, 6);
         int[] returnedValues2 = twoSumWithHashes(input, 6);
         System.out.println(Arrays.toString(returnedValues));
