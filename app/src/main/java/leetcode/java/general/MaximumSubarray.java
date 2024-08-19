@@ -14,6 +14,7 @@ https://leetcode.com/problems/maximum-subarray/description/
  */
 public class MaximumSubarray {
 
+    // using Kadane's algorithm
     public static int maxSubArray(int[] nums) {
         int currentMaxValue = nums[0]; // assuming the array is not null
         int currentSubArray = nums[0];
