@@ -13,76 +13,63 @@ https://leetcode.com/problems/decode-string/description/
  */
 public class RemoveNthNodeFromEndOfList {
 
-    public static String decodeString(String s) {
-        Stack<Character> myStack = new Stack<>();
-        char current;
-        String currentString = "";
-        String currentNumber = "";
-        for(int i = 0; i < s.length(); i++ ){
-            current = s.charAt(i);
-            if(current != ']') {
-                myStack.push(current);
-            } else {
-                // loop until find [, that will be the end of my current string
-                // then loop until current is no longer a number
-                // then you will have a number x string that need to repeat
-                // then push it all back to the stack :) and have fun
-                current = myStack.pop();
-                while(current != '[') {
-                    currentString = current + currentString;
-                    current = myStack.pop();
-                }
-                // here current string should contain my substring
-                // now I will iterate until current is no longer a number...
-                current = myStack.pop();
-                while(Character.isDigit(current)) {
-                    currentNumber = current + currentNumber;
-                    if (myStack.isEmpty()) break;
-                    current = myStack.pop();
-                }
-                // at this point, I can have the a of a2[bc], so, I should put it back...
-                if (!myStack.isEmpty()) myStack.push(current);
-                // now I should push back the extended string with currentNumber * currentString and refresh the variables...
-                String expandedString = expandString(currentNumber, currentString);
-                pushValues(myStack, expandedString);
-                currentString = "";
-                currentNumber = "";
-            }
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode current = head;
+        // an easy way is to find how many linked nodes are by looping them all
+        // then loop them again and get the node we want to remove it and update the next value
+        int length = 1;
+        while(current.next != null) {
+            length++;
+            current = current.next;
         }
-        //now we put all this into a string :)
-        String response = "";
-        char temporal;
-        while(!myStack.isEmpty()) {
-            temporal = myStack.pop();
-            response = temporal + response;
-        }
-        System.out.println(myStack.toString());
-        return response;
-    }
+        // now that we know length, we find n-1 and update it to point to n+1
+        // special case: when n is first or last
 
-    public static void pushValues(Stack<Character> base, String input) {
-        for(int i = 0; i < input.length(); i++) {
-            base.push(input.charAt(i));
-        }
-    }
+        int nodeToRemove = (length - n ) + 1;
 
-    public static String expandString (String times, String input) {
-        int loops = Integer.valueOf(times);
-        String result = "";
-        for(int i = 1; i <= loops; i++) {
-            result += input;
+        // if we want to remove first item
+         if (nodeToRemove == 1) {
+            return head.next;
         }
-        return result;
+        current = head;
+
+        for(int i = 1; i < nodeToRemove -1; i++) {
+            current = current.next;
+        }
+        current.next = current.next.next;
+        return head;
     }
 
 
     public static void main(String[] args) {
-        String input = "3[abc]";
-        //decodeString(input);
-        System.out.println(decodeString(input));
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(4);
+        ListNode node5 = new ListNode(5);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        ListNode response = removeNthFromEnd(node1, 2);
+        System.out.println("responses " + response);
+        while(response != null && response.next != null) {
+
+            System.out.println(response.val);
+            response = response.next;
+        }
+        System.out.println(response.val);
 
 //        String input2 = "3[abc]";
 //        decodeString(input2);
 
     }
+}
+
+class ListNode {
+     int val;
+     ListNode next;
+     ListNode() {}
+     ListNode(int val) { this.val = val; }
+     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 }
