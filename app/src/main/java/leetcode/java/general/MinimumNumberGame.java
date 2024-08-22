@@ -32,7 +32,6 @@ public class MinimumNumberGame {
             counter++;
         }
         return gameArray;
-
     }
 
     public static int[] numberGameWithArrays(int[] nums) {
