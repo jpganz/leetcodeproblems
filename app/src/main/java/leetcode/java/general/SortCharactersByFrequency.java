@@ -15,36 +15,39 @@ public class SortCharactersByFrequency {
 
     public static String frequencySort(String s) {
         // if characters are already put together on any order, but together, I can skip this part
-        String[] splittedString = s.split("");
-        Arrays.sort(splittedString); // log N
-        String reOrderedString = String.join("", splittedString); // o(n)
+        char[] splittedInput = s.toCharArray();
+        Arrays.sort(splittedInput); // log N
+
 
         //String reOrderedString = s;
         Comparator<String> myComparator = Comparator.comparingInt(String::length).reversed();
         PriorityQueue<String> orderedQueue = new PriorityQueue<>(myComparator);
         // split the string by same character and push it to the queue
         // poll one by one and thats it :)
-        char placeholder = reOrderedString.charAt(0);
-        String concatenatedPlaceholder = "" + placeholder;
+        char placeholder = splittedInput[0];
+        StringBuilder concatenatedPlaceholder = new StringBuilder();
+        concatenatedPlaceholder.append(placeholder);
         for(int i = 1; i < s.length(); i++) { // log N
-
-            if(placeholder != reOrderedString.charAt(i)) {
-                orderedQueue.add(concatenatedPlaceholder);
-                concatenatedPlaceholder = "" + reOrderedString.charAt(i);
-                placeholder = reOrderedString.charAt(i);
+            if(placeholder != splittedInput[i]) {
+                //orderedQueue.add(concatenatedPlaceholder);
+                orderedQueue.add(concatenatedPlaceholder.toString());
+                //concatenatedPlaceholder = "" + splittedInput[i];
+                concatenatedPlaceholder = new StringBuilder();
+                concatenatedPlaceholder.append(splittedInput[i]);
+                placeholder = splittedInput[i];
 
             } else {
-                concatenatedPlaceholder += reOrderedString.charAt(i);
+                concatenatedPlaceholder.append(splittedInput[i]);
             }
         }
-        orderedQueue.add(concatenatedPlaceholder);
+        orderedQueue.add(concatenatedPlaceholder.toString());
 
-        String response = "";
+        StringBuilder response = new StringBuilder();
         while(!orderedQueue.isEmpty()) {
-            response += orderedQueue.poll();
+            response.append(orderedQueue.poll());
         }
 
-        return response;
+        return response.toString();
     }
 
     // cccaaa -> aaaccc or cccaaa
@@ -53,7 +56,7 @@ public class SortCharactersByFrequency {
 
 
     public static void main(String[] args) {
-        String input = "raaeaedere";
+        String input = "raaeaedere"; // result eeeeaaarrd
         String output = frequencySort(input);
         System.out.println("the output is " + output);
 //        String[] test = "ccccaaa".split("");
