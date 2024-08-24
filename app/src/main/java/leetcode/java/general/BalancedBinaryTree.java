@@ -6,22 +6,20 @@ https://leetcode.com/problems/balanced-binary-tree/description/
 public class BalancedBinaryTree {
 
     public static boolean isBalanced(TreeNode root) {
-        if (root == null) return true;
-        int leftDepth = (root.left == null) ? 1 : 1 + depth(root.left);
-        int rightDept =  (root.right == null) ? 1 : 1 + depth(root.right);;
+        if (root == null || root.left == null && root.right == null) return true;
+        int leftDepth = (root.left == null) ? 0 : depth(root.left);
+        int rightDepth = (root.right == null) ? 0 : depth(root.right);
 
-        System.out.println(leftDepth);
-        System.out.println(rightDept);
-        return (Math.abs(leftDepth - rightDept) <= 1 &&
-                isBalanced(root.left) && isBalanced(root.right));
+        return (Math.abs(leftDepth - rightDepth) < 2
+                && isBalanced(root.left)
+                && isBalanced(root.right)
+        );
     }
 
     private static int depth(TreeNode parent) {
-        return 1 + Math.max(
-                (parent.left == null) ? 0 : depth(parent.left),
-                (parent.right == null) ? 0 :depth(parent.right)
-        );
-
+       int left = (parent.left == null) ? 0 : depth(parent.left);
+       int right = (parent.right == null) ? 0 : depth(parent.right);
+       return 1 + Math.max(left, right);
     }
 
 
