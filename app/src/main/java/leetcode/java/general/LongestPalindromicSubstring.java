@@ -7,8 +7,8 @@ public class LongestPalindromicSubstring {
 
     public static String longestPalindrome(String s) {
         // so, how do I find a palindrome string? :) thats a weird one
-        if (s.length() == 0 || s.length() == 1) return  s;
-        if(s.length() == 2) {
+        if (s.length() == 0 || s.length() == 1) return s;
+        if (s.length() == 2) {
             return (s.charAt(0) == s.charAt(1) ? s : String.valueOf(s.charAt(0)));
         }
         // we can do a very ugly solution with two loops
@@ -23,19 +23,23 @@ public class LongestPalindromicSubstring {
         // so, I find bb or bcb  and then iterate next until they are no longer equal or array is empty
         char[] input = s.toCharArray();
         String longestPalindrome = String.valueOf(s.charAt(0));
-        String temporal = longestPalindrome;
-
-        for(int i = 1; i < input.length -1; i++) {
+        String temporalOdd = longestPalindrome;
+        String temporalEven = longestPalindrome;
+        String longesInteration = longestPalindrome;
+        for (int i = 0; i < input.length - 1; i++) {
             //first case
-            if (input[i - 1] == input[i + 1]) { //smallest palindrome, type 2, only works if the input is >= 3
-                temporal = expandedPalindrome(input, i - 1, i + 1);
-            } else if (input[i - 1] == input[i]) { //smallest palindrome, type 1
-                // we need to check which is the biggest palindrome and replace it
-                temporal = expandedPalindrome(input, i - 1, i);
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                if (i > 0 && s.charAt(i - 1) == s.charAt(i)) {
+                    temporalOdd = expandedPalindrome(input, i-1, i+1);
+                }
+                temporalEven = expandedPalindrome(input, i, i+1);
+
+            } else if( i > 0 && s.charAt(i-1) == s.charAt(i+1)){
+                    temporalOdd = expandedPalindrome(input, i-1, i+1);
+                    temporalEven = "";
             }
-            if(temporal.length() > longestPalindrome.length()) {
-                longestPalindrome = temporal;
-            }
+            longesInteration = (temporalOdd.length() > temporalEven.length()) ? temporalOdd : temporalEven;
+            longestPalindrome = (longesInteration.length() > longestPalindrome.length()) ? longesInteration : longestPalindrome;
         }
         return longestPalindrome;
     }
@@ -50,7 +54,7 @@ public class LongestPalindromicSubstring {
 
 
     public static void main(String args[]) {
-        String input = "abb";
+        String input = "babad";
         System.out.println("the output is " + longestPalindrome(input));
 
     }
