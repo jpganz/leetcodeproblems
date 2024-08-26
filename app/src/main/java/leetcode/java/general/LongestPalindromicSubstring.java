@@ -5,22 +5,20 @@ https://leetcode.com/problems/balanced-binary-tree/description/
  */
 public class LongestPalindromicSubstring {
 
+    // we can do a very ugly solution with two loops
+    // if we have aabbaa then we will do a loop on the first a
+    // to a, to b, to b to a and then finally to a
+    // later second a starts and so on...
+    // second solution: we can iterate on s[1], we have two options of palindromes,
+    // even and odd length-words, so, abba or abcba, which means I can iterate looking for both cases
+    // if I find s[-1] = s[s] || s[-1] = s[+1] then its a palindrome
+    // after a find the minimum palindrome, then I expand it using a different function
+    // which will do s[-1 + n] and s[+1 +n] until they are no longer equal
+    // so, I find bb or bcb  and then iterate next until they are no longer equal or array is empty
     public static String longestPalindrome(String s) {
         // so, how do I find a palindrome string? :) thats a weird one
         if (s.length() == 0 || s.length() == 1) return s;
-        if (s.length() == 2) {
-            return (s.charAt(0) == s.charAt(1) ? s : String.valueOf(s.charAt(0)));
-        }
-        // we can do a very ugly solution with two loops
-        // if we have aabbaa then we will do a loop on the first a
-        // to a, to b, to b to a and then finally to a
-        // later second a starts and so on...
-        // second solution: we can iterate on s[1], we have two options of palindromes,
-        // even and odd length-words, so, abba or abcba, which means I can iterate looking for both cases
-        // if I find s[-1] = s[s] || s[-1] = s[+1] then its a palindrome
-        // after a find the minimum palindrome, then I expand it using a different function
-        // which will do s[-1 + n] and s[+1 +n] until they are no longer equal
-        // so, I find bb or bcb  and then iterate next until they are no longer equal or array is empty
+
         char[] input = s.toCharArray();
         String longestPalindrome = String.valueOf(s.charAt(0));
         String temporalOdd = longestPalindrome;
@@ -32,9 +30,11 @@ public class LongestPalindromicSubstring {
                 if (i > 0 && s.charAt(i - 1) == s.charAt(i)) {
                     temporalOdd = expandedPalindrome(input, i-1, i+1);
                 }
+                //second case case when we have aaa pattern
                 temporalEven = expandedPalindrome(input, i, i+1);
 
             } else if( i > 0 && s.charAt(i-1) == s.charAt(i+1)){
+                // second case when we have aba pattern
                     temporalOdd = expandedPalindrome(input, i-1, i+1);
                     temporalEven = "";
             }
