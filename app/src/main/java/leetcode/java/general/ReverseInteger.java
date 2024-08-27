@@ -2,16 +2,12 @@ package leetcode.java.general;
 
 
 /*
-https://leetcode.com/problems/rotated-digits/description/
+https://leetcode.com/problems/reverse-integer/description/
  */
 
 public class ReverseInteger {
 
 
-
-    // 1
-    // 2
-    // 3
     public static int reverse(int n) {
         int load = (n < 0) ? -1 : 1;
         n = Math.abs(n);
