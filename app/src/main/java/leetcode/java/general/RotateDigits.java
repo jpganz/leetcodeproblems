@@ -2,8 +2,7 @@ package leetcode.java.general;
 
 
 /*
-https://leetcode.com/problems/add-two-numbers/description/
-
+https://leetcode.com/problems/rotated-digits/description/
  */
 
 import java.util.HashMap;
@@ -13,29 +12,32 @@ public class RotateDigits {
 
     public static int rotatedDigits(int n) {
 
-        HashMap<Integer, Integer> validDictionary = new HashMap<>();
-        validDictionary.put(2,5);
-        validDictionary.put(5,2);
-        validDictionary.put(6,9);
-        validDictionary.put(9,6);
-
-        HashMap<Integer, Integer> invalidDictionary = new HashMap<>();
-        invalidDictionary.put(3, 3);
-        invalidDictionary.put(4, 3);
-        invalidDictionary.put(7, 3);
-
         int counter = 0;
-        StringBuilder temporal = new StringBuilder();
-        if(n < 2) return 0;
-        for(int i = 2; i < n; i++) {
-            String current = Integer.toString(i);
-
+        for(int i = 1; i <= n; i++) {
+            if(isValid(i)) counter++;
         }
-        return n;
+        return counter;
+    }
+
+    private static boolean isValid(int input) {
+    // Valid if N contains at least  2, 5, 6, 9
+    // Invalid if contains one of 3, 4, 7
+        boolean isValid = false;
+        while(input > 0) {
+            if(input % 10 == 2) isValid = true;
+            if(input % 10 == 5) isValid = true;
+            if(input % 10 == 6) isValid = true;
+            if(input % 10 == 9) isValid = true;
+            if(input % 10 == 3) return false;
+            if(input % 10 == 4) return false;
+            if(input % 10 == 7) return false;
+            input = input / 10;
+        }
+        return isValid;
     }
 
     public static void main(String[] args) {
-        rotatedDigits(10);
+        System.out.println(rotatedDigits(857));
     }
 }
 
