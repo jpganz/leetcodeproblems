@@ -17,9 +17,6 @@ public class SymmetricTree {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        List<TreeNode> toCompare = new ArrayList<>();
-
-
         if(compareNodes(root.left, root.right)) return true;
 
         return  false;
