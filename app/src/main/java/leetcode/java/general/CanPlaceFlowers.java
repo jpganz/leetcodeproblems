@@ -2,7 +2,7 @@ package leetcode.java.general;
 
 
 /*
-https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description
+https://leetcode.com/problems/can-place-flowers/submissions
  */
 
 import java.util.ArrayList;
