@@ -80,8 +80,10 @@ public class GreatestCommonDivisorOfStrings {
     public static void main(String[] args) {
        var output = gcdOfStrings("TAUXXTAUXXTAUXXTAUXXTAUXX", "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX");
        System.out.println("the output is " + output);
-       var anotherOutput = helper(1701, 3768);
+       var anotherOutput = helperGdc(1701, 3768);
+       var anotherOutput2 = helperGdc( 3768, 1701);
        System.out.println(anotherOutput);
+       System.out.println(anotherOutput2);
     }
 }
 
