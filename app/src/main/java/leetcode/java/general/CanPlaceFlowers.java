@@ -12,22 +12,24 @@ import java.util.List;
 public class CanPlaceFlowers {
 
     public static boolean canPlaceFlowers(int[] flowerbed, int n) {
-
-        int[] extendedBed = new int[flowerbed.length + 2];
-        System.arraycopy(flowerbed, 0, extendedBed, 1, flowerbed.length);
+        if(n == 0) return true;
         int toPlant = n;
-        for(int i = 1; i <= flowerbed.length; i++) {
-            if(extendedBed[i] == 0 && extendedBed[i-1] == 0 && extendedBed[i+1] == 0) {
-                extendedBed[i] = 1;
+        for(int i = 0; i < flowerbed.length; i++) {
+            boolean isLeftAvailable = (i == 0 || flowerbed[i-1] == 0);
+            boolean isRightAvailable = (i == flowerbed.length -1 || flowerbed[i+1] == 0);
+            if(isLeftAvailable && isRightAvailable && flowerbed[i] == 0) {
+                flowerbed[i] = 1;
                 toPlant--;
+                i++;
+                if(toPlant == 0) break;
             }
         }
-        return toPlant <= 0;
+        return toPlant == 0;
     }
 
     public static void main(String[] args) {
-        int[] flowerbed = {1,0,0,0,1,0,0};
-        int extraCandies = 2;
+        int[] flowerbed = {0,0,0,0,0,1,0,0};
+        int extraCandies = 0;
         boolean output = canPlaceFlowers(flowerbed, extraCandies);
         System.out.println(output);
     }
